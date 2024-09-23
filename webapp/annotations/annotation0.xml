@@ -1,0 +1,189 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/sap/ZLAM_SR_V2_TRAVEL_ANA$metadata">
+        <edmx:Include Namespace="cds_zlam_sr_sd_travel_analytics" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local1">
+            <Annotations Target="SAP.TravelType">
+                <Annotation Term="UI.DataPoint" Qualifier="TravelBeginDate">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Critical"/>
+                        <PropertyValue Property="Value" Path="BeginDate"/>
+                        <PropertyValue Property="Title" String="Open/In Process Travels"/>
+                        <PropertyValue Property="Description" String="Travel Status"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="TravelBeginDateAccepted">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+                        <PropertyValue Property="Value" Path="BeginDate"/>
+                        <PropertyValue Property="Title" String="Accepted Travels"/>
+                        <PropertyValue Property="Description" String="Travel Status (A)"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="TravelBeginDateRejected">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Negative"/>
+                        <PropertyValue Property="Value" Path="BeginDate"/>
+                        <PropertyValue Property="Title" String="Rejected Travels"/>
+                        <PropertyValue Property="Description" String="Travel Status (X)"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem" Qualifier="TravelTableOpen">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Travel"/>                    
+                            <PropertyValue Property="Value" Path="Description"/>
+                      </Record>
+                      <Record Type="UI.DataField">
+                         <PropertyValue Property="Label" String="Customer"/>
+                           <PropertyValue Property="Value" Path="CustomerID"/>                    
+                      </Record>
+                      <Record Type="UI.DataFieldForAnnotation">
+                          <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#TravelBeginDate"/>
+                      </Record>
+                  </Collection>
+                 </Annotation>
+                 <Annotation Term="UI.LineItem" Qualifier="TravelTableAccept">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Travel"/>                    
+                            <PropertyValue Property="Value" Path="Description"/>
+                      </Record>
+                      <Record Type="UI.DataField">
+                         <PropertyValue Property="Label" String="Customer"/>
+                           <PropertyValue Property="Value" Path="CustomerID"/>                    
+                      </Record>
+                      <Record Type="UI.DataFieldForAnnotation">
+                          <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#TravelBeginDateAccepted"/>
+                      </Record>
+                  </Collection>
+                 </Annotation>
+                 <Annotation Term="UI.LineItem" Qualifier="TravelTableReject">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Travel"/>                    
+                            <PropertyValue Property="Value" Path="Description"/>
+                      </Record>
+                      <Record Type="UI.DataField">
+                         <PropertyValue Property="Label" String="Customer"/>
+                           <PropertyValue Property="Value" Path="CustomerID"/>                    
+                      </Record>
+                      <Record Type="UI.DataFieldForAnnotation">
+                          <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#TravelBeginDateRejected"/>
+                      </Record>
+                  </Collection>
+                 </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="SVOpen">
+                    <Record>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="OverallStatus"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="N"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="SVAccepted">
+                    <Record>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="OverallStatus"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="B"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="SVRejected">
+                    <Record>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="OverallStatus"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="P"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                
+                <Annotation Term="UI.PresentationVariant" Qualifier="AgencyCounts">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="MaxItems" Int="5"/>
+                        <PropertyValue Property="SelectionFields">
+                            <Collection>
+                                <PropertyPath>AgencyID</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.Chart" Qualifier="FeeByAgency">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut"/>
+                        <PropertyValue Property="Title" String="Fees By Agency"/>
+                        <PropertyValue Property="Description" String="Collection of Agencies "/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>BookingFee</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="AgencyID"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>BookingFee</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="AgencyID"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

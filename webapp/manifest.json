@@ -1,0 +1,213 @@
+{
+    "_version": "1.64.0",
+    "sap.app": {
+        "id": "lam.ovp.ovpbookingsapp",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:ovp",
+            "version": "1.15.0",
+            "toolsId": "513eb4a8-8fd2-4157-b85d-bcf2c87e4487"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZLAM_SR_V2_BOOKING_ANA/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZLAM_SR_V2_BOOKING_ANA_VAN",
+                        "annotation"
+                    ],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZLAM_SR_V2_BOOKING_ANA_VAN": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZLAM_SR_V2_BOOKING_ANA_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/mainService/ZLAM_SR_V2_BOOKING_ANA_VAN.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            },
+            "ZLAM_SR_V2_TRAVEL_ANA_Annotation": {
+                "uri": "/destinations/abap-cloud-trial-abap-b698f3adtrial-dev/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZLAM_SR_V2_TRAVEL_ANA_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZLAM_SR_V2_TRAVEL_ANA/ZLAM_SR_V2_TRAVEL_ANA_Annotation.xml"
+                }
+            },
+            "ZLAM_SR_V2_TRAVEL_ANA": {
+                "uri": "/sap/opu/odata/sap/ZLAM_SR_V2_TRAVEL_ANA",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZLAM_SR_V2_TRAVEL_ANA_Annotation",
+                        "annotation0"
+                    ],
+                    "localUri": "localService/ZLAM_SR_V2_TRAVEL_ANA/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation0": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation0.xml",
+                "settings": {
+                    "localUri": "annotations/annotation0.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.124.5",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.f": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ovp": {},
+                "sap.ui.rta": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "lam.ovp.ovpbookingsapp.i18n.i18n"
+                }
+            },
+            "mainModel": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "ZLAM_SR_V2_TRAVEL_ANA": {
+                "dataSource": "ZLAM_SR_V2_TRAVEL_ANA",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [],
+            "targets": {}
+        }
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainModel",
+        "globalFilterEntityType": "BookingsType",
+        "containerLayout": "resizable",
+        "enableLiveFilter": true,
+        "considerAnalyticalParameters": false,
+        "cards": { 
+            "card0": {
+                "template": "sap.ovp.cards.charts.analytical",
+                "model": "mainModel",
+                "settings": {
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#FlightPriceColumn",
+                    "entitySet": "Bookings",
+                    "title": "Total Price by Date",
+                    "subTitle": "Date wise collection",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#DPFlightPrice"
+                }
+            },
+            "card02": {
+                "template": "sap.ovp.cards.charts.analytical",
+                "model": "ZLAM_SR_V2_TRAVEL_ANA",
+                "settings": {
+                    "entitySet": "Travel",
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#FeeByAgency",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.presentationAnnotationPath.AgencyCounts",
+                    "title": "Agency Earnings",
+                    "subTitle": "Inside Track"                    
+                }
+            },
+            "card01": {
+                "template": "sap.ovp.cards.table",
+                "model": "ZLAM_SR_V2_TRAVEL_ANA",
+                "settings": {
+                    "entitySet": "Travel",
+                    "title": "Travel by Status",
+                    "tabs": [
+                        {
+                            "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#TravelTableOpen",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#SVOpen",
+                            "value": "Open"
+                        },
+                        {
+                            "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#TravelTableAccept",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#SVAccepted",
+                            "value": "Accept"
+                        },
+                        {
+                            "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#TravelTableReject",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#SVRejected",
+                            "value": "Reject"
+                        }
+                    ],
+                    "sortBy": "REPLACE_WITH_SORT_BY_TYPE",
+                    "sortOrder": "descending"
+                }
+            }
+        },
+        "chartSettings": {}
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    }
+}
